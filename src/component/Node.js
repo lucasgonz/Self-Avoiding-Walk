@@ -1,7 +1,7 @@
 class Node {
-    constructor() {
-        this.dir;
-        this.pos = null;
+    constructor(dir = null, pos = null) {
+        this.dir = dir;
+        this.pos = pos;
         this.domain = [-2, -1, 1, 2];
     }
 

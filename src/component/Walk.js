@@ -1,8 +1,7 @@
 import LCG from "../random/LCG";
-import { deepCopy } from "../utils/utils";
 import Node from "./Node";
 
-class March2 {
+class Walk {
     constructor(n) {
         this.n = n;
         this.unnasigned = [];
@@ -45,12 +44,10 @@ class March2 {
         return node.domain;
     }
 
-    /**
-     * @returns {Node}
-     */
     selectUnasignedVariable() {
         return this.unnasigned[0];
     }
+
     selfAvoidingWalk() {
         if (this.isComplete()) return true;
 
@@ -59,12 +56,12 @@ class March2 {
         for (var value of node.domain) {
             let random = this.random.randomIntRange(0, node.domain.length);
 
-            let direction = this.getDirection(node.domain[random]);
+            let position = this.getPosition(node.domain[random]);
 
-            if (this.isValid(direction)) {
-                // tampon
+            if (this.isValid(position)) {
                 node.dir = node.domain[random];
-                node.setPos(direction);
+                node.domain = [node.dir];
+                node.setPos(position);
                 node.domain.splice(random, 1);
                 this.assigne(node);
                 this.pos = node.getIntPos();
@@ -83,7 +80,41 @@ class March2 {
         }
     }
 
-    getDirection(number) {
+    randomWalk() {
+        let posibleDir = [-2, -1, 1, 2];
+
+        for (let i = 0; i < this.n; i++) {
+            let dir = posibleDir[this.random.randomIntRange(0, posibleDir.length)];
+            let pos = this.getPosition(dir);
+            let node = new Node(dir, pos);
+            this.path.push(node);
+            this.pos = node.getIntPos();
+        }
+        this.render();
+    }
+
+    nonReversingWalk() {
+        let last = Number.MIN_SAFE_INTEGER;
+        let posibleDir = [-2, -1, 1, 2];
+
+        for (let i = 0; i < this.n; i++) {
+            // Logic
+            let dir = posibleDir[this.random.randomIntRange(0, posibleDir.length)];
+            while (dir == last * -1) {
+                dir = posibleDir[this.random.randomIntRange(0, posibleDir.length)];
+            }
+            last = dir;
+
+            // Node
+            let pos = this.getPosition(dir);
+            let node = new Node(dir, pos);
+            this.path.push(node);
+            this.pos = node.getIntPos();
+        }
+        this.render();
+    }
+
+    getPosition(number) {
         switch (number) {
             case 1:
                 return this.moveUp();
@@ -130,7 +161,6 @@ class March2 {
 
     clear() {
         this.feed.map((el) => clearTimeout(el));
-        this.path = [];
     }
 
     render() {
@@ -144,4 +174,4 @@ class March2 {
     }
 }
 
-export default March2;
+export default Walk;

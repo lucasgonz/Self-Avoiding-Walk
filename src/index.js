@@ -4,8 +4,7 @@ import LCG from "./random/LCG";
 import Khi2 from "./component/Khi2";
 import "../public/styles/index.css";
 import Chart from "chart.js";
-import March from "./component/March";
-import March2 from "./component/March2";
+import Walk from "./component/Walk";
 
 window.onload = () => {
     // Run partie 2
@@ -13,8 +12,18 @@ window.onload = () => {
         Partie_2();
     };
 
-    document.getElementById("runP3").onclick = () => {
-        Partie_3();
+    // Setup P3
+    let walk = "randomWalk";
+
+    $(document).on("click", 'input[name="walk"]', function () {
+        $('input[name="walk"]').not(this).prop("checked", false);
+        walk = this.value;
+    });
+
+    document.getElementById("runP3").onsubmit = (e) => {
+        let nStep = document.getElementById("nSteps").value;
+        Partie_3(nStep, walk);
+        e.preventDefault();
     };
 };
 
@@ -86,19 +95,22 @@ function setup() {
     canvas.parent(document.getElementById("march"));
 }
 
-function Partie_3() {
-    /*if (marche != null) marche.clear();
-    marche = new March(20);
+function Partie_3(n, choix) {
+    // Clear March and Canvas if exist
 
-    while (marche.selfAvoidingWalk().stuck == true) {
+    if (marche != null) {
         marche.clear();
-        marche = new March(15);
-    }*/
+    }
 
-    if (marche != null) marche.clear();
-    marche = new March2(400);
+    marche = new Walk(n);
 
-    if (marche.selfAvoidingWalk()) {
-        marche.render();
+    if (choix === "randomWalk") {
+        marche.randomWalk() ? marche.render() : console.log(false);
+    }
+    if (choix === "nonReversingWalk") {
+        marche.nonReversingWalk() ? marche.render() : console.log(false);
+    }
+    if (choix === "selfAvoidingWalk") {
+        marche.selfAvoidingWalk() ? marche.render() : console.log(false);
     }
 }

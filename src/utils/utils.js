@@ -26,8 +26,4 @@ function getLCGparams() {
     return { seed: params[0], mod: params[1], mult: parseInt(params[2]), inc: parseInt(params[3]) };
 }
 
-function deepCopy(object) {
-    return Object.assign(Object.create(Object.getPrototypeOf(object)), object);
-}
-
-export { timeInt, distribute, zip, getLCGparams, deepCopy };
+export { timeInt, distribute, zip, getLCGparams };

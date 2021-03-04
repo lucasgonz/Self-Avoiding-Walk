@@ -20,6 +20,7 @@
             crossorigin="anonymous"
         ></script>
         <script src="https://cdn.jsdelivr.net/npm/p5@1.2.0/lib/p5.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
     <body>
         <div class="lcg">
@@ -71,10 +72,40 @@
             <h2>Partie 3</h2>
             <div id="march" class="canvasP3"></div>
             <div class="graph_p3"></div>
-            <div class="config"></div>
-            <div class="run">
-                <button id="runP3" type="button" class="btn btn-outline-success">Run</button>
-            </div>
+            <form id="runP3">
+                <div class="config">
+                    <div class="iteration">
+                        n steps : <input id="nSteps" type="number" value="200" max="400" />
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="walk" id="randomWalk" value="randomWalk" checked/>
+                        <label class="form-check-label" for="randomWalk">randomWalk</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            name="walk"
+                            id="nonReversingWalk"
+                            value="nonReversingWalk"
+                        />
+                        <label class="form-check-label" for="nonReversingWalk">nonReversingWalk</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            name="walk"
+                            id="selfAvoidingWalk"
+                            value="selfAvoidingWalk"
+                        />
+                        <label class="form-check-label" for="selfAvoidingWalk">selfAvoidingWalk</label>
+                    </div>
+                </div>
+                <div class="run">
+                    <input  type="submit" value="Run" class="btn btn-outline-success"></button>
+                </div>
+            </form>
         </div>
     </body>
 </html>
