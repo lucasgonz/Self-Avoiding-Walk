@@ -1,4 +1,4 @@
-import { distribute, getLCGparams } from "./utils/utils";
+import { deepCopy, distribute, getLCGparams } from "./utils/utils";
 import Dice from "./component/Dice";
 import LCG from "./random/LCG";
 import Khi2 from "./component/Khi2";
@@ -96,9 +96,9 @@ function Partie_3() {
     }*/
 
     if (marche != null) marche.clear();
-    marche = new March2(300);
+    marche = new March2(400);
 
     if (marche.selfAvoidingWalk()) {
         marche.render();
-    } else console.log(false);
+    }
 }

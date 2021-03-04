@@ -1,4 +1,5 @@
 import LCG from "../random/LCG";
+import { deepCopy } from "../utils/utils";
 import Node from "./Node";
 
 class March2 {
@@ -35,8 +36,13 @@ class March2 {
     }
 
     unnasigne(node) {
+        node.domain = [-2, -1, 1, 2];
         this.unnasigned.push(node);
         this.path.splice(this.path.indexOf(node), 1);
+    }
+
+    getDomainValues(node) {
+        return node.domain;
     }
 
     /**
@@ -67,10 +73,10 @@ class March2 {
 
                 succes = this.selfAvoidingWalk();
 
-                if (succes) return true;
-                else {
+                if (succes) {
+                    return true;
+                } else {
                     this.unnasigne(node);
-
                     this.pos = this.path[this.path.length - 1].getIntPos();
                 }
             }
