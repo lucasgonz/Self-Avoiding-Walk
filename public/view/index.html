@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>React Webpack Project</title>
+        <!-- Latest compiled and minified CSS -->
+        <!-- CSS only -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+            crossorigin="anonymous"
+        />
+        <!-- jQuery library -->
+        <!-- JavaScript Bundle with Popper -->
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+            crossorigin="anonymous"
+        ></script>
+        <script src="https://cdn.jsdelivr.net/npm/p5@1.2.0/lib/p5.js"></script>
+    </head>
+    <body>
+        <div class="lcg">
+            <h2>LCG</h2>
+            <ul class="params">
+                <div class="form-group">
+                    <label for="Seed">Seed:</label>
+                    <input type="text" class="form-control" id="Seed" value="Time()" />
+                </div>
+                <div class="form-group">
+                    <label for="Mod">Mod:</label>
+                    <input type="text" class="form-control" id="Mod" value="2**32" />
+                </div>
+                <div class="form-group">
+                    <label for="Mult">Mult:</label>
+                    <input type="number" class="form-control" id="Mult" value="214013" />
+                </div>
+                <div class="form-group">
+                    <label for="Inc">Inc:</label>
+                    <input type="number" class="form-control" id="Inc" value="2531011" />
+                </div>
+            </ul>
+        </div>
+
+        <div class="partie_2">
+            <h2>Partie 2</h2>
+            <div class="graph_p2">
+                <canvas id="chartP2" width="100%" height="100%"></canvas>
+            </div>
+
+            <div class="lcg-params">
+                Seed:
+                <li class="lcg-param"></li>
+                Mod:
+                <li class="lcg-param"></li>
+                Mult:
+                <li class="lcg-param"></li>
+                Inc:
+                <li class="lcg-param"></li>
+            </div>
+            <div class="iteration">Iteration : <input id="p2Iter" type="number" value="1000" /></div>
+
+            <div class="run">
+                <button id="runP2" type="button" class="btn btn-outline-success">Run</button>
+            </div>
+        </div>
+
+        <div class="partie_3">
+            <h2>Partie 3</h2>
+            <div id="march" class="canvasP3"></div>
+            <div class="graph_p3"></div>
+            <div class="config"></div>
+            <div class="run">
+                <button id="runP3" type="button" class="btn btn-outline-success">Run</button>
+            </div>
+        </div>
+    </body>
+</html>

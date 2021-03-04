@@ -1,0 +1,79 @@
+html,
+body {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+}
+
+h2 {
+    align-self: center;
+}
+
+li {
+    list-style-type: none;
+}
+
+.lcg {
+    display: flex;
+    flex-direction: column;
+    width: 10%;
+    padding: 10px;
+    border: 1px solid #dcdcdc;
+}
+
+.params {
+    display: flex;
+    flex-direction: column;
+}
+
+.params * {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.partie_2 {
+    display: flex;
+    width: 45%;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.partie_3 {
+    display: flex;
+    width: 45%;
+    flex-direction: column;
+}
+
+.run {
+    display: flex;
+    justify-content: center;
+}
+
+.lcg-param {
+    font-size: smaller;
+    display: inline;
+    margin: 8px;
+    font-weight: normal;
+}
+
+.lcg-params {
+    font-size: smaller;
+    display: inline;
+    font-weight: bold;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.graph_p2 {
+    height: 50%;
+    width: 90%;
+}
