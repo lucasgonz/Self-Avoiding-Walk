@@ -91,8 +91,9 @@ window.setup = setup;
 var marche;
 
 function setup() {
-    canvas = createCanvas(400, 400);
-    canvas.parent(document.getElementById("march"));
+    var parent = document.getElementById("march");
+    canvas = createCanvas(500, 500);
+    canvas.parent(parent);
 }
 
 function Partie_3(n, choix) {

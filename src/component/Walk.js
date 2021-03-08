@@ -35,7 +35,6 @@ class Walk {
     }
 
     unnasigne(node) {
-        node.domain = [-2, -1, 1, 2];
         this.unnasigned.push(node);
         this.path.splice(this.path.indexOf(node), 1);
     }
@@ -59,8 +58,9 @@ class Walk {
             let position = this.getPosition(node.domain[random]);
 
             if (this.isValid(position)) {
+                let save = new Array(...node.domain);
+
                 node.dir = node.domain[random];
-                node.domain = [node.dir];
                 node.setPos(position);
                 node.domain.splice(random, 1);
                 this.assigne(node);
@@ -73,6 +73,7 @@ class Walk {
                 if (succes) {
                     return true;
                 } else {
+                    node.domain = save;
                     this.unnasigne(node);
                     this.pos = this.path[this.path.length - 1].getIntPos();
                 }
