@@ -48,10 +48,11 @@ function Partie_2() {
     const result = khi2.execute(observed, attendue);
 
     // Render
-    charP2.data.datasets[0].data = observed;
-    charP2.data.datasets[1].data = attendue;
+    charP2.data.datasets[0].data = attendue;
+    charP2.data.datasets[1].data = observed;
     charP2.update();
     document.querySelectorAll(".lcg-param").forEach((el, index) => (el.innerHTML = dice.random.params[index]));
+    document.getElementById("Khi2-result").innerHTML = result;
 }
 
 // Setup partie 2
