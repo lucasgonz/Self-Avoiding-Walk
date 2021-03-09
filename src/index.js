@@ -1,4 +1,4 @@
-import { deepCopy, distribute, getLCGparams } from "./utils/utils";
+import { deepCopy, distribute, getLCGparams, getEuclideanDistance, rootMeanSquare } from "./utils/utils";
 import Dice from "./component/Dice";
 import LCG from "./random/LCG";
 import Khi2 from "./component/Khi2";
@@ -25,6 +25,8 @@ window.onload = () => {
         Partie_3(nStep, walk);
         e.preventDefault();
     };
+
+    Partie_3_4(100);
 };
 
 function Partie_2() {
@@ -65,13 +67,13 @@ let charP2 = new Chart(document.getElementById("chartP2"), {
             {
                 label: "Attendue",
                 data: [],
-                borderColor: "rgba(255, 99, 132, 0.2)",
+                borderColor: "rgba(255, 99, 132, 1)",
                 fill: false,
             },
             {
                 label: "Observé",
                 data: [],
-                borderColor: "rgba(54, 162, 235, 0.2)",
+                borderColor: "rgba(54, 162, 235, 1)",
                 fill: false,
             },
         ],
@@ -115,4 +117,101 @@ function Partie_3(n, choix) {
     if (choix === "selfAvoidingWalk") {
         marche.selfAvoidingWalk() ? marche.render() : console.log(false);
     }
+
+    var start = marche.path[0].getIntPos();
+    var end = marche.path[marche.path.length - 1].getIntPos();
 }
+
+var rdmWalk_meanSquare = [];
+var nRvsWalk_meanSquare = [];
+var selfAvdWalk_meanSquare = [];
+const testOcurence = 100;
+
+function Partie_3_4(n) {
+    var lcg = new LCG({});
+
+    for (let i = 1; i < n; i++) {
+        // rdmWalk
+        let tmp = [];
+        for (let j = 0; j < testOcurence; j++) {
+            let rdmWalk = new Walk(i, lcg);
+            rdmWalk.randomWalk();
+            tmp.push(rdmWalk.getEndToEndDistance());
+            rdmWalk.clear();
+        }
+        rdmWalk_meanSquare.push(tmp);
+
+        // nRvsWalk
+        tmp = [];
+        for (let j = 0; j < testOcurence; j++) {
+            let nRvsWalk = new Walk(i, lcg);
+            nRvsWalk.nonReversingWalk();
+            tmp.push(nRvsWalk.getEndToEndDistance());
+            nRvsWalk.clear();
+        }
+        nRvsWalk_meanSquare.push(tmp);
+
+        //selfAvdWalk
+        tmp = [];
+        for (let j = 0; j < testOcurence; j++) {
+            let selfAvdWalk = new Walk(i, lcg);
+            selfAvdWalk.selfAvoidingWalk();
+            tmp.push(selfAvdWalk.getEndToEndDistance());
+            selfAvdWalk.clear();
+        }
+        selfAvdWalk_meanSquare.push(tmp);
+    }
+
+    chartP3_4.la;
+    chartP3_4.data.datasets[0].data = rdmWalk_meanSquare.map((arr) => rootMeanSquare(arr));
+    chartP3_4.data.datasets[1].data = nRvsWalk_meanSquare.map((arr) => rootMeanSquare(arr));
+    chartP3_4.data.datasets[2].data = selfAvdWalk_meanSquare.map((arr) => rootMeanSquare(arr));
+    chartP3_4.update();
+}
+
+let chartP3_4 = new Chart(document.getElementById("chartP3_4"), {
+    type: "line",
+    data: {
+        labels: [...Array(100).keys()].map((x) => ++x),
+        datasets: [
+            {
+                label: "Self-Avoinding Walk",
+                data: [],
+                borderColor: "rgba(255, 99, 132, 1)",
+                fill: false,
+            },
+            {
+                label: "Non reversing",
+                data: [],
+                borderColor: "rgba(54, 162, 235, 1)",
+                fill: false,
+            },
+            {
+                label: "Random Walk",
+                data: [],
+                borderColor: "rgba(54, 49, 235, 1)",
+                fill: false,
+            },
+        ],
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        title: {
+            display: true,
+            text: "Dice Sum for Iteration",
+        },
+        scales: {
+            xAxes: [
+                {
+                    ticks: {
+                        // Include a dollar sign in the ticks
+                        userCallback: function (label, index, labels) {
+                            return index;
+                        },
+                    },
+                },
+            ],
+        },
+    },
+});

@@ -10,6 +10,17 @@ function distribute(values) {
     return distributed;
 }
 
+function getEuclideanDistance(pos1, pos2) {
+    var a = pos1[0] - pos2[0];
+    var b = pos1[1] - pos2[1];
+    var distance = Math.sqrt(a * a + b * b);
+    return distance;
+}
+
+function rootMeanSquare(arr) {
+    return Math.floor(Math.sqrt(arr.map((val) => val * val).reduce((acum, val) => acum + val) / arr.length));
+}
+
 function zip(arr1, arr2) {
     return arr1.map((e, i) => [e, arr2[i]]);
 }
@@ -26,4 +37,4 @@ function getLCGparams() {
     return { seed: params[0], mod: params[1], mult: parseInt(params[2]), inc: parseInt(params[3]) };
 }
 
-export { timeInt, distribute, zip, getLCGparams };
+export { timeInt, distribute, zip, getLCGparams, getEuclideanDistance, rootMeanSquare };

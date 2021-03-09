@@ -1,13 +1,14 @@
 import LCG from "../random/LCG";
 import Node from "./Node";
+import { getEuclideanDistance } from "../utils/utils";
 
 class Walk {
-    constructor(n) {
+    constructor(n, lcg = new LCG({})) {
         this.n = n;
         this.unnasigned = [];
         this.pos = [width / 2, height / 2];
         this.path = [];
-        this.random = new LCG({});
+        this.random = lcg;
         this.feed = [];
         this.init();
         // P5js function clear canvas
@@ -91,7 +92,7 @@ class Walk {
             this.path.push(node);
             this.pos = node.getIntPos();
         }
-        this.render();
+        return true;
     }
 
     nonReversingWalk() {
@@ -112,7 +113,7 @@ class Walk {
             this.path.push(node);
             this.pos = node.getIntPos();
         }
-        this.render();
+        return true;
     }
 
     getPosition(number) {
@@ -126,6 +127,13 @@ class Walk {
             case -1:
                 return this.moveDown();
         }
+    }
+
+    getEndToEndDistance() {
+        var start = this.path[0].getIntPos();
+        var end = this.path[this.path.length - 1].getIntPos();
+        var euclidean = getEuclideanDistance(start, end);
+        return euclidean;
     }
 
     moveUp() {
