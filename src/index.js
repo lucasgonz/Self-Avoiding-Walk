@@ -26,7 +26,7 @@ window.onload = () => {
         e.preventDefault();
     };
 
-    Partie_3_4(100);
+    Partie_3_4(p3StepSize);
 };
 
 function Partie_2() {
@@ -125,7 +125,8 @@ function Partie_3(n, choix) {
 var rdmWalk_meanSquare = [];
 var nRvsWalk_meanSquare = [];
 var selfAvdWalk_meanSquare = [];
-const testOcurence = 100;
+const testOcurence = 400;
+const p3StepSize = 80;
 
 function Partie_3_4(n) {
     var lcg = new LCG({});
@@ -162,7 +163,6 @@ function Partie_3_4(n) {
         selfAvdWalk_meanSquare.push(tmp);
     }
 
-    chartP3_4.la;
     chartP3_4.data.datasets[0].data = rdmWalk_meanSquare.map((arr) => rootMeanSquare(arr));
     chartP3_4.data.datasets[1].data = nRvsWalk_meanSquare.map((arr) => rootMeanSquare(arr));
     chartP3_4.data.datasets[2].data = selfAvdWalk_meanSquare.map((arr) => rootMeanSquare(arr));
@@ -172,7 +172,7 @@ function Partie_3_4(n) {
 let chartP3_4 = new Chart(document.getElementById("chartP3_4"), {
     type: "line",
     data: {
-        labels: [...Array(100).keys()].map((x) => ++x),
+        labels: [...Array(p3StepSize).keys()].map((x) => ++x),
         datasets: [
             {
                 label: "Self-Avoinding Walk",

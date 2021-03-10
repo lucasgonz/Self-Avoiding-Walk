@@ -14,11 +14,11 @@ function getEuclideanDistance(pos1, pos2) {
     var a = pos1[0] - pos2[0];
     var b = pos1[1] - pos2[1];
     var distance = Math.sqrt(a * a + b * b);
-    return distance;
+    return (distance / 10) ** 2;
 }
 
 function rootMeanSquare(arr) {
-    return Math.floor(Math.sqrt(arr.map((val) => val * val).reduce((acum, val) => acum + val) / arr.length));
+    return arr.map((val) => val ** 2).reduce((acum, val) => acum + val) / arr.length;
 }
 
 function zip(arr1, arr2) {
