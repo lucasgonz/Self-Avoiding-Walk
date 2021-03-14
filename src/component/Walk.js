@@ -106,7 +106,6 @@ class Walk {
                 dir = posibleDir[this.random.randomIntRange(0, posibleDir.length)];
             }
             last = dir;
-
             // Node
             let pos = this.getPosition(dir);
             let node = new Node(dir, pos);
