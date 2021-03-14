@@ -6,7 +6,7 @@ import { timeInt } from "../utils/utils";
 
 class LCG {
     /**
-     * From ref BSD formula  mod : 2**32, mult : 214013, inc : 2531011
+     * From ref BSD formula : Seed : timeInt  mod : 2**32, mult : 214013, inc : 2531011
      * @param {Object} param0
      */
     constructor({ seed = timeInt(), mod = 2 ** 32, mult = 214013, inc = 2531011 }) {

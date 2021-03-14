@@ -14,10 +14,10 @@ function getEuclideanDistance(pos1, pos2) {
     var a = pos1[0] - pos2[0];
     var b = pos1[1] - pos2[1];
     var distance = Math.sqrt(a * a + b * b);
-    return (distance / 10) ** 2;
+    return distance ** 2;
 }
 
-function rootMeanSquare(arr) {
+function MeanSquare(arr) {
     return arr.map((val) => val ** 2).reduce((acum, val) => acum + val) / arr.length;
 }
 
@@ -37,4 +37,4 @@ function getLCGparams() {
     return { seed: params[0], mod: params[1], mult: parseInt(params[2]), inc: parseInt(params[3]) };
 }
 
-export { timeInt, distribute, zip, getLCGparams, getEuclideanDistance, rootMeanSquare };
+export { timeInt, distribute, zip, getLCGparams, getEuclideanDistance, MeanSquare };
